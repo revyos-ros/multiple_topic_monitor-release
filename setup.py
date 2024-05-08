@@ -4,7 +4,7 @@ package_name = 'multiple_topic_monitor'
 
 setup(
     name=package_name,
-    version='1.0.1',
+    version='1.0.2',
     packages=find_packages(exclude=['test']),
     data_files=[
         ('share/ament_index/resource_index/packages',
@@ -25,8 +25,17 @@ setup(
         'python3-pytest'
     ],
     entry_points={
-        'console_scripts': [
-            'multiple_topic_monitor = multiple_topic_monitor.multiple_topic_monitor:main'
+        'ros2cli.command': [
+            'topic = ros2topic.command.topic:TopicCommand',
         ],
+        'ros2cli.extension_point': [
+            'ros2topic.verb = ros2topic.verb:VerbExtension',
+        ],
+        'ros2topic.verb': [
+            'multiple_topic_monitor = verb.multiple_topic_monitor:MonitorVerb'
+        ],
+        # 'console_scripts': [
+        #     'multiple_topic_monitor = multiple_topic_monitor.multiple_topic_monitor:main'
+        # ],
     },
 )
